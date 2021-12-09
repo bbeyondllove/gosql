@@ -66,11 +66,22 @@ func zeroValueFilter(fields map[string]reflect.Value, zv []string) map[string]in
 
 	for k, v := range fields {
 		v = reflect.Indirect(v)
-		//summer modify 20211209
-		//if inSlice(k, zv) || !IsZero(v) {
-		if inSlice(k, zv) {
+
+		if inSlice(k, zv) || !IsZero(v) {
 			m[k] = v.Interface()
 		}
+	}
+
+	return m
+}
+
+//summer modify 20211209
+func ValueFilter(fields map[string]reflect.Value, zv []string) map[string]interface{} {
+	m := make(map[string]interface{})
+
+	for k, v := range fields {
+		v = reflect.Indirect(v)
+		m[k] = v.Interface()
 	}
 
 	return m
