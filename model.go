@@ -270,7 +270,7 @@ func (b *Builder) Update(zeroValues ...string) (affected int64, err error) {
 	}
 
 	fields := b.reflectModel(AUTO_UPDATE_TIME_FIELDS)
-	m := zeroValueFilter(fields, zeroValues)
+	m := ValueFilter(fields, zeroValues)
 
 	// If where is empty, the primary key where condition is generated automatically
 	b.generateWhereForPK(m)
